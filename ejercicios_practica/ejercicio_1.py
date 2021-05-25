@@ -15,6 +15,9 @@ def imprimir_mayor(numero_1, numero_2):
     # números ingresados por parámetro es mayor
     # y luego imprimir dicho valor en pantalla
 
+    mayor = max(numero_1, numero_2)
+    print('El mayor de los números ingresados es:', mayor)
+    return
 
 if __name__ == '__main__':
     print("Bienvenidos a otra clase de Inove con Python")
