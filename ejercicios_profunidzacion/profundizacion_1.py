@@ -72,6 +72,46 @@ import random
 # Dentro de esta sección copiar y crear
 # todas las funciones que utilice
 
+def tirar_dados (cantidad_de_dados):
+    tirada_de_dados = []
+    for i in range(cantidad_de_dados):
+        numero_aleatorio = random.randrange(1, 7)
+        tirada_de_dados.append(numero_aleatorio)
+    
+    print('Los dados arrojados fueron:', tirada_de_dados)
+    return tirada_de_dados
+
+
+def conjunto_de_dados (tirada_de_dados, dados_guardados):
+
+    guardados_tirada_actual = []
+    
+    try:
+        cant_dados_guardados = len(dados_guardados)
+    except:
+        cant_dados_guardados = 0
+
+    if cant_dados_guardados < 2:
+        max_repeticiones = max(tirada_de_dados, key = tirada_de_dados.count)
+        dados_guardados = []
+        
+    else:
+        max_repeticiones = max(dados_guardados, key = dados_guardados.count)
+    
+    for i in range(len(tirada_de_dados)):
+        if tirada_de_dados[i] == max_repeticiones: 
+            guardados_tirada_actual.append(tirada_de_dados[i])
+
+    dados_guardados = dados_guardados + guardados_tirada_actual
+    if len(guardados_tirada_actual) == 0:
+        print('El número buscado no salió en esta tirada de dados, intentá nuevamente!')
+        dados_guardados = [None]
+        return
+
+    else:
+        print('Lista de dados guardados:', dados_guardados) 
+
+    return dados_guardados
 
 # --------------------------------
 
@@ -80,3 +120,38 @@ if __name__ == '__main__':
     # A partir de aquí escriba el código que
     # invoca al as funciones y resuelve el enunciado
     # Leer el enunciado con atención y consultar cualquier duda
+    
+    cantidad_de_dados = 5
+    tirada_de_dados = []
+    juego = []
+    tiros_pendientes = 3
+
+    while (cantidad_de_dados > 0):
+        
+        tirada_de_dados = tirar_dados(cantidad_de_dados)
+        juego = conjunto_de_dados(tirada_de_dados, juego)
+
+        try:
+            cantidad_de_dados = 5 - len(juego)
+        except:
+            cantidad_de_dados = cantidad_de_dados
+
+        if cantidad_de_dados == 0:
+            print('Generala!')
+        else:
+            print('La cantidad de dados restantes es:', cantidad_de_dados)
+
+        tiros_pendientes -= 1
+        
+        if tiros_pendientes == 0:
+            cantidad_de_dados = 5
+            juego = []
+            tiros_pendientes = 3
+            print('Agotaste tus oportunidades, tenés que empezar nuevamente!')
+            continuar = str(input('Seguir jugando? S/N:'))
+            if continuar == 'N' or continuar == 'n':
+                break
+
+        
+
+

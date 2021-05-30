@@ -20,6 +20,7 @@ def contar (lista, numero):
 # Aquí copiar la función lista_aleatoria
 # ya elaborada
 
+
 def lista_aleatoria (inicio, fin, cantidad):
     lista_aleatoria = []
     for i in range(cantidad):
